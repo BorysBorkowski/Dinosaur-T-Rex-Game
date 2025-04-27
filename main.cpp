@@ -1,5 +1,8 @@
 #include <iostream>
 #include <windows.h>
+#include <conio.h>
+#include <cstdlib>
+#include <time.h>
 
 using namespace std;
 
@@ -24,7 +27,7 @@ void board_display_and_movement(int board[height][width])
         {
             board[pos_y][pos_x + offset] = 2;
         }
-        for(int i = 0; i < height + offset; ++i)
+        for(int i = 0; i < height; ++i)
         {
             for(int j = 0 + offset; j < 6 + offset; ++j)
             {
@@ -54,33 +57,10 @@ void board_display_and_movement(int board[height][width])
             SetConsoleTextAttribute(hConsole, 15);
             board[pos_y][pos_x + offset - 1] = 0;
             board[pos_y - 1][pos_x + offset - 1] = 0;
-        }
     }
-
-void movement_player(int board[height][width], char movement)
-{
-   switch(movement)
-     {
-         case 'w':
-            board[pos_y][pos_x + offset] = 0;
-            pos_y -= 1;
-            to_jump = 1;
-            board_display_and_movement(board);
-            Sleep(1000);
-            board[pos_y + 1][pos_x + offset] = 2;
-            board[pos_y - 1][pos_x + offset] = 0;
-            pos_y += 1;
-            to_jump = 0;
-            break;
-         case 's':
-            board[pos_y - 1][pos_x + offset] = 0;
-            to_duck = 1;
-            board_display_and_movement(board);
-            Sleep(1000);
-            board[pos_y - 1][pos_x + offset] = 2;
-            to_duck = 0;
-            break;
-     }
+    srand(time(NULL));
+    int delay = rand()%400 + 500;
+    Sleep(delay);
 }
 
 int main()
@@ -96,8 +76,34 @@ int main()
      while(true)
      {
         board_display_and_movement(board);
-        cin >> movement;
-        movement_player(board, movement);
+        if(kbhit())
+        {
+            switch(_getwch())
+            {
+            case 'w':
+                {
+                board[pos_y][pos_x + offset] = 0;
+                pos_y -= 1;
+                to_jump = 1;
+                board_display_and_movement(board);
+
+                board[pos_y + 1][pos_x + offset] = 2;
+                board[pos_y - 1][pos_x + offset] = 0;
+                pos_y += 1;
+                to_jump = 0;
+                break;
+                }
+            case 's':
+            {
+                board[pos_y - 1][pos_x + offset] = 0;
+                to_duck = 1;
+                board_display_and_movement(board);
+                board[pos_y - 1][pos_x + offset] = 2;
+                to_duck = 0;
+                break;
+            }
+            }
+        }
         offset += 1;
      }
 }
