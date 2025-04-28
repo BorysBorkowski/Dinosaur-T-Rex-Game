@@ -131,11 +131,11 @@ int main()
      }
 }
 /*
-No có¿, nie uda³o mi siê dokonczyæ tego projektu na czas.
-Zdecydowanie siê stara³em, i tak ten kod pozostawia wiele do rzyczenia.
-Gra niedzia³a tak jak zamierza³em, to znaczy: wygl¹da tragicznie, ma wiele b³êdów, brakuje miêdzy innymi pterodaktymi
-(co oznacza, ¿e kucanie jest bezu¿yteczne, rozgrywka trwa od 10-22s (a mia³a trwaæ nawet w niskoñczonoœæ),
- a co najgorsze, niemo¿na mojej wersji porównaæ do orgina³u. Czy jestem na siebie z³y?
- Nie. Czy jestem zdeprymowany? Puki co nie. Pod czas tego projektu nauczy³em sie nowych rzêczy.
- To nie jest moje ostatnie s³owo :).
+No coz, nie udalo mi sie dokonczyc tego projektu na czas.
+Zdecydowanie sie staralem, i tak ten kod pozostawia wiele do rzyczenia.
+Gra niedziala tak jak zamierzalem, to znaczy: wyglada tragicznie, ma wiele bledow, brakuje miedzy innymi pterodaktymi
+(co oznacza, ze kucanie jest bezuÂ¿yteczne, rozgrywka trwa od 10-22s (a miala trwac nawet w niskonczonosc),
+ a co najgorsze, niemozna mojej wersji porÃ³wnac do orginalu. Czy jestem na siebie zÅ‚y?
+ Nie. Czy jestem zdeprymowany? Puki co nie. Pod czas tego projektu nauczylem sie nowych rzeczy.
+ To nie jest moje ostatnie slowo :).
 */
