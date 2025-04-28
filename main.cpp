@@ -11,16 +11,25 @@ const int width = 25;
 int pos_x = 1;
 int pos_y = 2;
 int offset = 0;
-HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-bool to_duck = 0;
+int to_duck = 0;
 bool to_jump = 0;
+int turns = 0;
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 void board_display_and_movement(int board[height][width])
 {
         system("cls");
         if(to_duck == 0)
         {
+            if(to_duck == 0)
+         {
             board[pos_y][pos_x + offset] = 2;
+            board[pos_y - 1][pos_x + offset] = 2;
+        }
+        else
+        {
+            board[pos_y][pos_x + offset] = 2;
+        }
             board[pos_y - 1][pos_x + offset] = 2;
         }
         else
@@ -65,14 +74,21 @@ void board_display_and_movement(int board[height][width])
 
 int main()
 {
+    HANDLE std_out = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    COORD coord;
+
+    //system("cls");
+    coord.X = 0;
+    coord.Y = 0;
+    SetConsoleCursorPosition(std_out, coord);
 
     int board[height][width]=
-    {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3},
-     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3},
-     {0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 3, 3, 3},
+    {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+     {0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 3, 0, 0},
      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 
-     char movement;
      while(true)
      {
         board_display_and_movement(board);
@@ -81,18 +97,15 @@ int main()
             switch(_getwch())
             {
             case 'w':
-                {
+            {
                 board[pos_y][pos_x + offset] = 0;
                 pos_y -= 1;
                 to_jump = 1;
                 board_display_and_movement(board);
-
                 board[pos_y + 1][pos_x + offset] = 2;
                 board[pos_y - 1][pos_x + offset] = 0;
-                pos_y += 1;
-                to_jump = 0;
                 break;
-                }
+            }
             case 's':
             {
                 board[pos_y - 1][pos_x + offset] = 0;
@@ -105,5 +118,24 @@ int main()
             }
         }
         offset += 1;
+        if(to_jump == true)
+        {
+            turns += 1;;
+        }
+        if(turns == 2)
+        {
+            pos_y += 1;
+            to_jump = false;
+            turns = 0;
+        }
      }
 }
+/*
+No có¿, nie uda³o mi siê dokonczyæ tego projektu na czas.
+Zdecydowanie siê stara³em, i tak ten kod pozostawia wiele do rzyczenia.
+Gra niedzia³a tak jak zamierza³em, to znaczy: wygl¹da tragicznie, ma wiele b³êdów, brakuje miêdzy innymi pterodaktymi
+(co oznacza, ¿e kucanie jest bezu¿yteczne, rozgrywka trwa od 10-22s (a mia³a trwaæ nawet w niskoñczonoœæ),
+ a co najgorsze, niemo¿na mojej wersji porównaæ do orgina³u. Czy jestem na siebie z³y?
+ Nie. Czy jestem zdeprymowany? Puki co nie. Pod czas tego projektu nauczy³em sie nowych rzêczy.
+ To nie jest moje ostatnie s³owo :).
+*/
